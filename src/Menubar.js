@@ -3,7 +3,7 @@ import { menuLinks } from "./Data";
 import UserImg from "./assets/userImage.png";
 // import Logo from "../assets/logo-sm.png";
 
-const Navbar = () => {
+const Menubar = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -86,4 +86,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Menubar;

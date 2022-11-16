@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { navLinks } from "../Data";
+import { navLinks } from "./Data";
 // import UserImg from "../assets/userImage.png";
 // import Logo from "../assets/logo-sm.png";
 

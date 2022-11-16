@@ -1,11 +1,11 @@
 import React from 'react'
-import { ourMenu } from '../Data'
+import { ourMenu } from './Data'
 
 const Menu = () => {
   return (
     <section id='menu' className="w-full h-full relative bg-gray-100 py-10">
         <div className="w-full h-full overflow-auto  mx-auto flex flex-col justify-center relative">
-            <h3 class="text-4xl text-center font-bold my-6 text-gray-800">Our Menu</h3>
+            <h3 className="text-4xl text-center font-bold my-6 text-gray-800">Our Menu</h3>
             <div className="w-full my-8 md:w-11/12 m-auto relative">
                 <div id="menuCard" className="grid w-full md:grid-cols-3 lg:grid-cols-4 grid-flow-row space-y-3 space-x-2 gap-4 p-2 place-content-center">
                     {ourMenu.map((item) => {

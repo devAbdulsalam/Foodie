@@ -1,5 +1,5 @@
 import React from 'react'
-import BgImage from "../assets/foods/bgimage.jpeg"
+import BgImage from "./assets/foods/bgimage.jpeg"
 
 const About = () => {
   return (
@@ -14,7 +14,7 @@ const About = () => {
 					<div className="px-4 py-6 mx-auto first:lg:shadow-lg sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
 						<div className="grid gap-5 row-gap-8 lg:grid-cols-2 ">
 							<div className="md:hidden">
-								<img className="object-cover w-full h-56 rounded shadow-lg sm:h-96" src="./images/004.jpeg" alt="" />
+								<img className="object-cover w-full h-56 rounded shadow-lg sm:h-96" src={BgImage} alt="" />
 							</div>
 							<div className="flex flex-col justify-center">
 								<div className="max-w-xl mb-6">

@@ -4,7 +4,7 @@ import Menu from "./Menu"
 import Testimonial from "./Testimonial"
 import Footer from "./Footer"
 import About from './About';
-const  index = () => {
+const  Home = () => {
   return (
     <div className="App">
       <Nav />
@@ -17,4 +17,4 @@ const  index = () => {
   );
 }
 
-export default index
+export default Home
