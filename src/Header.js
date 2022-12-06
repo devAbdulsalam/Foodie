@@ -1,5 +1,4 @@
 import React from 'react'
-// import bgImage from './foods/bgimage.jpeg'
 
 const Header = () => {
   return (
@@ -20,7 +19,7 @@ const Header = () => {
 						<h3 className="text-3xl font-bold mb-8">
 							Explore our Toothsome Foods
 						</h3>
-						<a href="#menu">
+						<a href="/menus">
 							<button
 								type="button"
 								className="inline-block px-6 py-2.5 border-2 text-white bg-green-600 hover:bg-green-400 hover:border-green-400 border-green-600 font-medium text-lg leading-tight uppercase rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out"

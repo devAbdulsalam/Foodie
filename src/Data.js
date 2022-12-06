@@ -7,20 +7,17 @@ export const menuLinks = [
     { name: "Logout", link: "./home", icon : "log-out"},
   ];
 export const navLinks = [
-    { name: "Home", link: "#"},
-    { name: "Menu", link: "#menu"},
-    { name: "About", link: "#aboutUs"},
-    { name: "Reviews", link: "#reviews"},
-    { name: "Contact", link: "#contact"},
-    { name: "Login", link: "./login"},
+    { name: "Home", link: "/"},
+    { name: "Menu", link: "/menus"},
+    { name: "About", link: "/about"},
+    { name: "Contact", link: "/#contact"},
+    { name: "Login", link: "/login"},
   ];
-export const agentmenuLinks = [
-    { name: "Home", link: "./adashboard", icon :"home" },
-    { name: "Order", link: "./alocation", icon : "trash-bin"},
-    { name: "Wallet", link: "./awallet", icon : "wallet"},
-    { name: "Profile", link: "./aprofile", icon : "person"},
-    { name: "About", link: "#", icon : "information-circle"},
-    { name: "Logout", link: "#", icon : "log-out"},
+
+export const menuBtns = [
+    { name: "Popular", id :"popular"},
+    { name: "Diabetics", id: "diabetics"},
+    { name: "Vegetarian", id: "vegan" },
   ];
 
 
@@ -37,7 +34,7 @@ export const ourMenu = [{
     id: 3,
     tittle: "Pounded Yam",
     category: "dinner",
-    img: "../assets/foods/poundedYam.jpg",
+    img: require("./assets/foods/poundedYam.jpg"),
     desc: "Pounded yam is one of the most popular foods in Nigeria. pounded yam made form yam cooked and pounded to swallow and egusi soup made from Egusi seeds or pumpkin seeds are a good source of protein, minerals and unsaturated fats including omeda-3.",
     price: 2500,
     rating: 5,
@@ -73,7 +70,7 @@ export const ourMenu = [{
     id: 5,
     tittle: "Pap",
     category: "vegan",
-    img: "../assets/foods/pap.jfif",
+    img: require("./assets/foods/pap.jfif"),
     desc: "This is another very common Nigerian breakfast dish. In most homes, both the Akara and pap are bought from street vendors who fry the akara on the spot, so you buy it steaming hot. Some people for different reasons, process and fry theirs at home. Akara is a beans fritter made from beans paste while the pap is a paste made from grains, mostly corn but also millet etc. It is turned into a gruel to go with the akara using boiling water.",
     price: 1000,
     rating: 4.5,
@@ -89,7 +86,7 @@ export const ourMenu = [{
 },
 {
     id: 2,
-    tittle: "okra",
+    tittle: "okro",
     category: "diabetics",
     img: "https://th.bing.com/th/id/OIP.SkaCk0VR8XNoCGEubdNfjwHaE8?pid=ImgDet&w=720&h=480&rs=1",
     desc: "Okro is a common and popular vegetable used widely in preparing soups in Nigeria. It is also used in other parts of the world to prepare delicacies. Okra is rich in antioxidants, minerals and other nutrients. It has loads of health benefits aside from helping people with diabetes",
@@ -118,7 +115,7 @@ export const ourMenu = [{
     id: 9,
     tittle: "Eba",
     category: "dinner",
-    img: "../assets/foods/eba.jfif",
+    img: require("./assets/foods/eba.jfif"),
     desc: "Eba or garri is a Nigerian staple food consisting of cassava flour combined with hot water. The combination is traditionally mixed with a large wooden spoon until it firms up, and is then rolled into a ball. Eba is served with almost all Nigerian soups. It can be dipped into the soups, but it's also often served with stews and various meat dishes.",
     price: 1400,
     rating: 5,
@@ -127,7 +124,7 @@ export const ourMenu = [{
     id: 10,
     tittle: "Amala",
     category: "dinner",
-    img: "../assets/foods/amala.jfif",
+    img: require("./assets/foods/amala.jfif"),
     desc: "Amala and Ewedu soup is a popular food among the Yorubas in Nigeria, With complement of Ewedu Soup/Jute leaves has a lot of health benefits aside from regulating blood sugar levels and stabilizing blood pressure.",
     price: 2250,
     rating: 5,
@@ -136,7 +133,7 @@ export const ourMenu = [{
     id: 12,
     tittle: "Yam and source",
     category: "vegan",
-    img: "../assets/foods/slice_yam.jpg",
+    img: require("./assets/foods/slice_yam.jpg"),
     desc: "Yam is a good source of carbohydrates, which provides the body with energy. Tomatoes are loaded with vitamins and other nutrients that would help protect your body from diseases. ",
     price: 700,
     rating: 4.5,
@@ -145,7 +142,7 @@ export const ourMenu = [{
     id: 13,
     tittle: "Tuwo shinkafa",
     category: "dinner",
-    img: "../assets/foods/semo.jfif",
+    img: require("./assets/foods/semo.jfif"),
     desc: "Tuwo shinkafa is a unique Nigerian dish consisting of rice flour or soft, short-grained rice and water. The combination of those ingredients is cooked, mashed, and formed into large balls. It is popular throughout the northern parts of the country, and is often served as an accompaniment to various soups and stews.",
     price: 1800,
     rating: 5,
@@ -190,7 +187,7 @@ export const ourMenu = [{
     id: 17,
     tittle: "Better leaf soup",
     category: "deibetics",
-    img: "../assets/foods/betterleaf.png",
+    img: require("./assets/foods/betterleaf.png"),
     desc: "Bitter leaf is a popular leaf used widely in Nigeria in preparing local delicacies like soups and dishes. Bitterleaf soup is a special delicacy of Igbo tribe of Nigeria. It is also used for medicinal purposes. Studies show that bitter leaf has anti-cancerous properties, regulates blood pressure and also helpful in the management of diabetes",
     price: 1800,
     rating: 5,
@@ -243,4 +240,16 @@ export const ourMenu = [{
 
 ];
 
- 
+//  //footer
+// Products
+export const products = [
+    { name: "Home", link: "/"},
+    { name: "Menu", link: "/menus"},
+    { name: "blog", link: "/blog"},
+  ];
+
+export const usefulLinks = [
+    { name: "Pricing", link: "/"},
+    { name: "Setting", link: "/menus"},
+    { name: "Help", link: "/about"},
+  ];

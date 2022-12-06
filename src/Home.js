@@ -1,17 +1,15 @@
+// import react from "react"
 import Nav from "./Navbar"
+import Sidebar from './Sidebar';
 import Header from "./Header"
-import Menu from "./Menu"
-import Testimonial from "./Testimonial"
 import Footer from "./Footer"
-import About from './About';
+
 const  Home = () => {
   return (
-    <div className="App">
+    <div className="h-screen">
       <Nav />
+      <Sidebar/>
       <Header />
-      <About />
-      <Menu />
-      <Testimonial />
       <Footer />
     </div>
   );

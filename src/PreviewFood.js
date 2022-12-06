@@ -1,133 +1,119 @@
-import React from 'react'
-
+import React, { useState, useContext} from 'react'
+import { ourMenu } from './Data'
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { BasketContext } from "./contexts/BasketContext"
+import Sidebar from './Sidebar';
+import Nav from "./Navbar"
+import Footer from "./Footer"
+import Rating from "./Rating"
+import OrderFood from "./OrderFood"
 const PreviewFood = () => {
-  return (
-        <section id="previewFood" className="bg-black bg-opacity-20 absolute w-full h-full top-0 left-0 duration-500 z-50 hidden">
-            <div className="flex place-items-center w-full h-full">
-                <i id="close" className="fa fa-times text-gray-700 text-2xl float-right cursor-pointer"></i>
-                <div className="text-lg bg-white w-11/12 mx-auto p-4 rounded-md shadow-md">
-                    <div className="mx-auto flex flex-wrap">
-                        <img src="" alt="Foodimg" className="lg:w-1/2 w-full lg:h-auto h-40 object-cover object-center rounded"/>
+    const {id} = useParams()
+    const navigate = useNavigate()
+    const {addToBasket} = useContext(BasketContext)
+    const [basketSucessfull, setBasketSucessfull] = useState(false)
+
+    const singleFood = ourMenu.find(item => item.id === parseInt(id))
+    const {tittle, img, desc, price, rating} = singleFood
+    const [myOrder, setMyOrder] = useState(false)
+    const [plate, setPlate] = useState('1')
+        
+    //  saveContactToLocalStorage
+
+    const food = {id, tittle, img, plate, price} 
+    const toggleBasket = () =>{        
+        setBasketSucessfull(true)
+        setTimeout(() => {
+            setBasketSucessfull(false)
+        }, 500);
+
+    }
+    
+    const handleOrder = () =>{
+         setMyOrder(!myOrder)
+    }
+    return (
+    <div className="h-screen overflow-auto">
+        <Nav />
+        <Sidebar/>
+            <section className="bg-black bg-opacity-20  w-full">
+                <div className="fixed z-[100] top-10 mt-10 flex justify-between w-full md:px-20 mx-auto p-4">
+                    <h2 className="text-2xl md:text-4xl text-green-600 font-bold capitalize">{tittle}</h2>
+                    <nav className="flex justify-content-end">
+                        <ol className="hidden md:flex justify-content-end items-center gap-1 text-lg md:text-xl">
+                            <li className="text-lg md:text-xl font-bold py-2 text-blue-500  hover:text-blue-600"><Link to="/">Home</Link></li>
+                            <i className="fa fa-chevron-right"></i>
+                            <li className="text-lg md:text-xl font-bold py-2 text-blue-500  hover:text-blue-600"><Link to="/menus">Menus</Link></li>
+                            <i className="fa fa-chevron-right"></i>
+                            <li className="text-lg md:text-xl font-bold py-2">{tittle.slice(0, 10)}</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div className="text-lg bg-white w-full p-3 md:p-10 mt-20">
+                    <div className="flex mt-10 md:w-10/12 mx-auto flex-wrap">
+                        <img src={img} alt="Foodimg" className="lg:w-1/2 w-full lg:h-auto max-h-96 h-40 object-cover object-center rounded"/>
                         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-3 lg:mt-0">
                             <div className="flex mb-4 justify-between px-2">
-                                <h2 id="foodTitle" className="text-xl text-green-600 font-bold">
-                                    Delicious Food
-                                </h2>
-                                <span id="prevPrice" className="title-font font-medium text-xl text-gray-900">
-                                    $58.00 
+                                <h2 className="text-3xl text-green-600 font-bold capitalize">{tittle}</h2>
+                                <span id="prevPrice" className="title-font font-medium text-2xl text-gray-900">
+                                    &#8358;{price}
                                 </span>
-							</div>
-                            <p id="fullDisc" className="leading-relaxed">
-                                Everyday eat what is good and be healthy, remember what You
-                                eat is what You are.
+                            </div>
+                            <p className="md:text-xl leading-relaxed">
+                                {desc}
                             </p>
                             <div className="flex my-3 justify-between items-center pb-2 border-b-2 border-gray-100">
-                                <div className="flex items-center">
-                                    <svg
-                                        fill="currentColor"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        className="w-4 h-4 text-indigo-500"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                        ></path>
-                                    </svg>
-                                    <svg
-                                        fill="currentColor"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        className="w-4 h-4 text-indigo-500"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                        ></path>
-                                    </svg>
-                                    <svg
-                                        fill="currentColor"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        className="w-4 h-4 text-indigo-500"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                        ></path>
-                                    </svg>
-                                    <svg
-                                        fill="currentColor"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        className="w-4 h-4 text-indigo-500"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                        ></path>
-                                    </svg>
-                                    <svg
-                                        fill="currentColor"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        className="w-4 h-4 text-indigo-500"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                        ></path>
-                                    </svg>
-                                </div>
+                                <Rating value={rating}/>   
                                 <div className="flex ml-6 items-center">
                                     <span className="mr-3">Plates</span>
                                     <div className="relative">
                                         <select
-                                            className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
+                                            value={plate} onChange={(e) => setPlate(e.target.value)} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
                                         >
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
+                                            <option value="1">1</option>
+                                            <option  value="2" >2</option>
+                                            <option  value="3" >3</option>
+                                            <option value="4">4</option>
                                         </select>
                                         <span
                                             className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center"
                                         >
-                                            <svg
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                className="w-4 h-4"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path d="M6 9l6 6 6-6"></path>
-                                            </svg>
+                                            <i className='fa fa-chevron-down'></i>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-end">
-                                <button	id="addToBasket" className="flex ml-auto text-white font-semibold bg-green-600 border-0 py-2 px-6 focus:outline-none hover:bg-green-500 rounded">
-                                    Add to basket
+                                <button	onClick={() => navigate(-1)} className="flex ml-auto text-white font-semibold bg-green-600 border-0 py-2 px-6 focus:outline-none hover:bg-green-500 rounded">
+                                    Back
+                                </button>
+                                <button	onClick={handleOrder} className="flex ml-auto text-white font-semibold bg-green-600 border-0 py-2 px-6 focus:outline-none hover:bg-green-500 rounded">
+                                    Order
+                                </button>
+                                <button	onClick={() => {
+                                    addToBasket(id, food)
+                                    toggleBasket()
+                                    }} className="flex ml-auto text-white font-semibold bg-green-600 border-0 py-2 px-6 focus:outline-none hover:bg-green-500 rounded">
+                                    Add to Basket
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            {basketSucessfull ?
+             <div className="bg-black bg-opacity-20 absolute w-full h-screen top-0 duration-500 z-50">
+				<div className="flex place-items-center w-full h-full p-1">
+					<div className="mx-auto">
+						<h5 className="text-center text-white font-semibold text-xl">
+							Added to basket Successfully
+						</h5>
+					</div>
+				</div>
+			</div> : ""}
+            {myOrder ? <OrderFood setMyOrder={setMyOrder} myOrder={myOrder} food={food}/> : ""}
+            <Footer/>
+    </div>
   )
 }
 

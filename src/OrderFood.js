@@ -1,145 +1,71 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { ourMenu } from './Data'
 import { useNavigate } from 'react-router-dom';
 
-// localStorage
-import {useLocalStorage} from './useLocalStorage'
 
-const Cart = ({mycart, setMyCart,}) => {
-    const foodBasket = useLocalStorage()
-	const [foods, setFoods] = useState([])
+const OrderFood = ({setMyOrder, myOrder, food}) => {
+    const {id, plate} = food;
     const navigate = useNavigate()
-    const [inputLocation, setInputLocation] = useState(false)
+    const [inputLocation, setInputLocation] = useState(true)
     const [payment, setPayment] = useState(false)
     const [paymentSucessfull, setPaymentSucessfull] = useState(false)
     const [inputPin, setInputPin] = useState(false)
     const [location, setLocation] = useState('')
     
-
-	useEffect(()=>{
-		setFoods(() => foodBasket)
-	}, [foodBasket])
-		
-		const deleteFood = (id)=> {
-		const items = foodBasket.filter((item) => item.id !== id) 
-        localStorage.setItem("foodBasket", JSON.stringify(items))
-    }
-
-	const clearBasket = () => {
-        localStorage.removeItem("foodBasket")
-    }
-	const totalPrice = foods.reduce((total, item) =>{
-			return total + (item.price * Number(item.plate))
-		}, 0)
-
-	const handleCart = () =>{
-        setMyCart(!mycart)
-        // setInputLocation(!inputLocation)
-    }
-     
-	const handlePayment = () =>{
-         setPayment(!payment)
-		}  
-	const locationform = () =>{
-		setPayment(!payment)
-		setInputLocation(!inputLocation)	
-    } 
-	const handleLocation = () =>{
+    const singleFood = ourMenu.find(item => item.id === parseInt(id))
+    const {tittle, price} = singleFood
+    console.log()    
+    const handleOrder = () =>{
+         setMyOrder(!myOrder)
+    }  
+    const handleLocation = () =>{
         if(location){
-         setInputLocation(!inputLocation)   	
-			setInputPin(!inputPin)
+            console.log(location)
+            setInputLocation(!inputLocation)
+            setPayment(!payment)
         }else{
             console.log("location not found")
         }
-    } 
+    }  
+    const handlePayment = () =>{
+         setPayment(!payment)
+         setInputPin(!inputPin)
+
+    }  
     const handlePaymentPin = () =>{
          setPaymentSucessfull(!paymentSucessfull)
 
-    } 
-  return ( <section>
-			
-			<div className="bg-black bg-opacity-20 absolute w-full h-full top-0 left-0 duration-500 z-50">
+    }  
+  return (    
+        <section>
+			{inputLocation ? <div className="bg-black bg-opacity-20 absolute w-full h-full top-0 left-0 duration-500 z-50 ">
 				<div className="flex place-items-center w-full h-full">
-					<div
-						className="text-lg bg-white w-11/12 md:max-w-2xl mx-auto p-4 rounded-md shadow-md"
-					>
-						<i
-							onClick={handleCart}
-							className="close fa fa-times text-gray-700 text-2xl float-right cursor-pointer"
-						></i>
-						<h1 className="text-2xl font-bold text-center text-green-600">
-							My Basket
-						</h1>
-						<div className="">{
-
-							foods? foods.map((item) => {
-								const {id, tittle, price, plate} = item
-								return(
-									<div key={id}className="grid grid-cols-2 py-2">
-										<div className='max-w-[180px]'>
-											<p id="" className="font-semibold text-xl">{tittle}</p>
-										</div>
-										<div class="grid grid-cols-3 gap-2 justify-center">
-											<p id="" className="font-semibold text-green-500 text-lg">{plate}</p>
-											<p id="" className="font-semibold text-xl">&#8358;{price * Number(plate)}</p>
-											<p className="font-semibold text-xl text-center"><i id="" onClick={() => deleteFood(id)} className="fa fa-trash text-red-500 "></i></p>
-										</div>
-									</div>
-
-								)
-							}): <><p>no food in the basket</p></>
-							// console.log(foods)
-						}
-							
-							<div className="flex justify-center py-3">
-								<p id="" className="font-semibold text-2xl">
-									Total <span className="text-green-500">&#8358; {totalPrice}</span>
-								</p>
+					<div className="text-lg bg-white w-11/12 mx-auto p-4 rounded-md shadow-md">
+						<i	onClick={handleOrder} className="close fa fa-times text-gray-700 text-2xl float-right cursor-pointer"></i>
+						<form className="bg-white py-3 rounded text-center">
+							<h1 className="text-2xl font-bold mb-4">Enter Your Location</h1>
+							<div>
+								<input id="location" value={location} onChange={(e) => setLocation(e.target.value)} type="text" className="px-2 py-1.5 w-full text-lg font-semibold bg-gray-500 text-white bg-clip-padding border-0 border-green-300 rounded transition ease-in-out m-0 focus:text-white focus:border-green-500 focus:outline-green-500" placeholder="Kano"/>
+								<p	id="warning" className="hidden text-lg text-center duration-500 transition-all ease-in-out" style={{color: "red"}} ></p>
 							</div>
-							<div className="p-2 text-center w-full">
-								<button
-									onClick={() => clearBasket()}
-									id="clearCart"
-									type="button"
-									className="inline-flex justify-center items-center mx-2 font-semibold bg-green-500 p-2 px-8 text-xl text-white rounded cursor-pointer hover:bg-green-500"
-								>
-									Clear
-								</button>
-								<button
-									onClick={() => handlePayment()} 
-									type="button"
-									className="inline-flex justify-center items-center mx-2 font-semibold bg-green-500 p-2 px-8 text-xl text-white rounded cursor-pointe hover:bg-green-500"
-								>
-									Order
-								</button>
-							</div>
-						</div>
+							<button	onClick={handleLocation}  type="button" className="px-8 bg-green-600 hover:bg-green-500 text-white font-semibold py-2 mt-3 w-full rounded-md">
+								Enter
+							</button>
+						</form>
 					</div>
 				</div>
-			</div>
-			
+			</div> : ""}
 			{payment ? <div className="bg-black bg-opacity-20 absolute w-full h-full top-0 duration-500 z-50">
 				<div className="flex place-items-center w-full h-full">
 					<div className="text-lg bg-white w-11/12 p-4 mx-auto rounded-md shadow-md">
 						<i	onClick={() => setPayment(!payment)} className="close fa fa-times text-gray-700 text-2xl float-right cursor-pointer"></i>
 						<h5 className="text-center font-semibold text-2xl my-6">Payment</h5>
 						<div className="p-2">
-							{
-							foods? foods.map((item) => {
-								const {id, tittle, price, plate} = item
-								return(
-									<div key={id}className="grid grid-cols-2 py-2">
-										<div className='max-w-[180px]'>
-											<p id="" className="font-semibold text-xl">{tittle}</p>
-										</div>
-										<div class="grid grid-cols-2 gap-2 justify-center">
-											<p id="" className="font-semibold text-green-500 text-lg">{plate}</p>
-											<p id="" className="font-semibold text-xl">&#8358;{price * Number(plate)}</p>
-										</div>
-									</div>
-
-								)
-							}): <><p>no food in the basket</p></>
-						}
+							<div className="flex justify-between py-2">
+								<p id="" className="font-semibold text-xl capitalize">{tittle}</p>
+								<p id="" className="font-semibold text-xl">{plate} plate/s</p>
+								<p id="" className="font-semibold text-xl">&#8358; {price}</p>
+							</div>
 						</div>
 						<div className="flex justify-center items-center">
                             <h1 className="font-semibold text-center text-xl text-green-500">
@@ -147,26 +73,9 @@ const Cart = ({mycart, setMyCart,}) => {
                                 <span className="font-semibold text-xl text-black"> &#8358; 2,200.10</span>
                             </h1>
 						</div>
-						<button	type="button" onClick={() => locationform()}  className="px-8 bg-green-600 hover:bg-green-500 font-bold text-white py-2 mt-6 w-full rounded-md">
-							Pay &#8358;  {totalPrice}
+						<button	type="button" onClick={handlePayment}  className="px-8 bg-green-600 hover:bg-green-500 font-bold text-white py-2 mt-6 w-full rounded-md">
+							Pay &#8358; {price * Number(plate)}
 						</button>
-					</div>
-				</div>
-			</div> : ""}
-			{inputLocation ? <div className="bg-black bg-opacity-20 absolute w-full h-full top-0 left-0 duration-500 z-50 ">
-				<div className="flex place-items-center w-full h-full">
-					<div className="text-lg bg-white w-11/12 mx-auto p-4 rounded-md shadow-md">
-						<i	onClick={handleCart} className="close fa fa-times text-gray-700 text-2xl float-right cursor-pointer"></i>
-						<form className="bg-white py-3 rounded text-center">
-							<h1 className="text-2xl font-bold mb-4">Enter Your Location</h1>
-							<div>
-								<input id="location" value={location} onChange={(e) => setLocation(e.target.value)} type="text" className="px-2 py-1.5 w-full text-lg font-semibold bg-gray-500 text-white bg-clip-padding border-0 border-green-300 rounded transition ease-in-out m-0 focus:text-white focus:border-green-500 focus:outline-green-500" placeholder="Kano"/>
-								<p	id="warning" className="hidden text-lg text-center duration-500 transition-all ease-in-out" style={{color: "red"}} ></p>
-							</div>
-							<button	onClick={() => handleLocation()}  type="button" className="px-8 bg-green-600 hover:bg-green-500 text-white font-semibold py-2 mt-3 w-full rounded-md">
-								Enter
-							</button>
-						</form>
 					</div>
 				</div>
 			</div> : ""}
@@ -185,25 +94,25 @@ const Cart = ({mycart, setMyCart,}) => {
 										className="m-2 border h-10 w-10 text-center form-control rounded"
 										type="text"
 										id="first"
-										maxLength="1"
+										maxlength="1"
 									/>
 									<input
 										className="m-2 border h-10 w-10 text-center form-control rounded"
 										type="text"
 										id="second"
-										maxLength="1"
+										maxlength="1"
 									/>
 									<input
 										className="m-2 border h-10 w-10 text-center form-control rounded"
 										type="text"
 										id="third"
-										maxLength="1"
+										maxlength="1"
 									/>
 									<input
 										className="m-2 border h-10 w-10 text-center form-control rounded"
 										type="text"
 										id="fourth"
-										maxLength="1"
+										maxlength="1"
 									/>
 								</div>
 
@@ -315,8 +224,9 @@ const Cart = ({mycart, setMyCart,}) => {
 					</div>
 				</div>
 			</div> : ""}
-  </section>
+        </section> 
+
   )
 }
 
-export default Cart
+export default OrderFood
