@@ -18,18 +18,19 @@ const Menu = () => {
 
     const searchFoods = () =>{
         const value = searchInput
-        let searchedItem = ourMenu.filter(menuItem => {
+        let searchedItem = ourMenu.filter((menuItem) => {
             if (menuItem.category.toLowerCase().includes(value) ||
                 menuItem.tittle.toLowerCase().includes(value) ||
                 menuItem.desc.toLowerCase().includes(value) ||
                 menuItem.price === (value)||
                 menuItem.rating === (value)) {
                 return menuItem;
-            }else{
-                setNoItem(true)
             }
             return menuItem;
-        });        
+        });
+        if(!searchedItem){
+            setNoItem(true)
+        }       
         setFood(() => searchedItem)
     }
     const filterFood =(name)=>{
