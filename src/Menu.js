@@ -9,7 +9,6 @@ const Menu = () => {
     const navigate = useNavigate()
     const [searchInput, setSearchInput] = useState()
     const [food, setFood] = useState([])
-    const [noItem, setNoItem] = useState(false)
 
     useEffect(() => {
         let fiveStarFood = ourMenu.filter((fiveStar) => fiveStar.rating === 5)
@@ -18,20 +17,13 @@ const Menu = () => {
 
     const searchFoods = () =>{
         const value = searchInput
-        let searchedItem = ourMenu.filter((menuItem) => {
-            if (menuItem.category.toLowerCase().includes(value) ||
-                menuItem.tittle.toLowerCase().includes(value) ||
-                menuItem.desc.toLowerCase().includes(value) ||
-                menuItem.price === (value)||
-                menuItem.rating === (value)) {
-                return menuItem;
-            }
-            return menuItem;
-        });
-        if(!searchedItem){
-            setNoItem(true)
-        }       
-        setFood(() => searchedItem)
+        let searchedItem = ourMenu.filter((menuItem) => (menuItem.category.toLowerCase().includes(value) ||
+            menuItem.tittle.toLowerCase().includes(value) ||  menuItem.desc.toLowerCase().includes(value) ||
+            menuItem.price === (value)|| menuItem.rating === (value))
+        );
+
+         setFood(() => searchedItem)
+              
     }
     const filterFood =(name)=>{
         if(name){
@@ -114,6 +106,12 @@ const Menu = () => {
             </div>
             <div className="w-full h-full overflow-auto mx-auto flex flex-col mt-20 justify-center relative">
                 <div className="w-full my-8 md:w-11/12 m-auto relative">
+                {food.length <= 0 ? 
+                    <div id="noitemfound" className="p-2 w-full py-8">
+                        <h1 className="text-3xl text-red-400 grid-2 md:my-36 font-semibold mt-20 text-center">
+                            NO ITEM FOUND
+                        </h1>
+                    </div> : 
                     <div id="menuCard" className="grid w-full md:grid-cols-3 lg:grid-cols-4 grid-flow-row space-y-3 space-x-2 gap-4 p-2 place-content-center">
                         {food.map((item) => {
                             const {img, id, desc, tittle, price} = item
@@ -136,12 +134,7 @@ const Menu = () => {
                                 )
                             })}
                     </div> 
-                    {noItem ? 
-                    <div id="noitemfound" className="debug p-2 w-full py-8">
-                        <h1 className="text-3xl text-red-400 grid-2 mt-10 text-center">
-                            NO ITEM FOUND
-                        </h1>
-                    </div> : console.log("items are available")}
+                }
                 </div>
             </div>
         </section>
