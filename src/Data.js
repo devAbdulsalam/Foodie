@@ -133,7 +133,7 @@ export const ourMenu = [{
     id: 12,
     tittle: "Yam and source",
     category: "vegan",
-    img: require("./assets/foods/slice_yam.jpg"),
+    img: "https://www.bing.com/images/search?q=Fried+Yams+Nigeria&FORM=IRTRRL",
     desc: "Yam is a good source of carbohydrates, which provides the body with energy. Tomatoes are loaded with vitamins and other nutrients that would help protect your body from diseases. ",
     price: 700,
     rating: 4.5,
